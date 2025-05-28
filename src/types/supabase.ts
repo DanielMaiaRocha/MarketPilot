@@ -9,6 +9,191 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      campaign_data: {
+        Row: {
+          campaign_id: string
+          campaign_name: string
+          clicks: number
+          conversions: number
+          cpc: number
+          created_at: string | null
+          date: string
+          fetched_at: string
+          id: string
+          impressions: number
+          platform: string
+          spend: number
+          user_id: string
+        }
+        Insert: {
+          campaign_id: string
+          campaign_name: string
+          clicks: number
+          conversions: number
+          cpc: number
+          created_at?: string | null
+          date: string
+          fetched_at: string
+          id?: string
+          impressions: number
+          platform: string
+          spend: number
+          user_id: string
+        }
+        Update: {
+          campaign_id?: string
+          campaign_name?: string
+          clicks?: number
+          conversions?: number
+          cpc?: number
+          created_at?: string | null
+          date?: string
+          fetched_at?: string
+          id?: string
+          impressions?: number
+          platform?: string
+          spend?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      email_automations: {
+        Row: {
+          created_at: string | null
+          delay_days: number | null
+          email_body: string
+          email_subject: string
+          id: string
+          name: string
+          status: string
+          template_id: string | null
+          trigger_status: string | null
+          trigger_type: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          delay_days?: number | null
+          email_body: string
+          email_subject: string
+          id?: string
+          name: string
+          status?: string
+          template_id?: string | null
+          trigger_status?: string | null
+          trigger_type: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          delay_days?: number | null
+          email_body?: string
+          email_subject?: string
+          id?: string
+          name?: string
+          status?: string
+          template_id?: string | null
+          trigger_status?: string | null
+          trigger_type?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_automations_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "email_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_logs: {
+        Row: {
+          automation_id: string | null
+          body: string
+          created_at: string | null
+          id: string
+          lead_id: string | null
+          recipient: string
+          sender: string
+          sent_at: string
+          status: string
+          subject: string
+        }
+        Insert: {
+          automation_id?: string | null
+          body: string
+          created_at?: string | null
+          id?: string
+          lead_id?: string | null
+          recipient: string
+          sender: string
+          sent_at: string
+          status: string
+          subject: string
+        }
+        Update: {
+          automation_id?: string | null
+          body?: string
+          created_at?: string | null
+          id?: string
+          lead_id?: string | null
+          recipient?: string
+          sender?: string
+          sent_at?: string
+          status?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_logs_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "email_logs_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_templates: {
+        Row: {
+          body: string
+          created_at: string | null
+          id: string
+          name: string
+          subject: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string | null
+          id?: string
+          name: string
+          subject: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string | null
+          id?: string
+          name?: string
+          subject?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string | null
